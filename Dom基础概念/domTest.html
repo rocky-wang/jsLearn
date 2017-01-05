@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dom学习知识汇总</title>
+</head>
+
+<body>
+
+<ul id="ul1">
+    <li>123</li>
+    <li>456</li>
+    <li>789</li>
+</ul>
+
+<ul>
+    <li>
+        <span>我是第1条内容</span>
+        <input type="button" onclick="hideContent(this)" value="隐藏">
+    </li>
+    <li>
+        <span>我是第2条内容</span>
+        <input type="button" onclick="hideContent(this)" value="隐藏">
+    </li>
+    <li>
+        <span>我是第3条内容</span>
+        <input type="button" onclick="hideContent(this)" value="隐藏">
+    </li>
+    <li>
+        <span>我是第4条内容</span>
+        <a id="hide-icon" href="javascript:">隐藏</a>
+        <!--<input type="button" onclick="hideContent()" value="隐藏">-->
+    </li>
+    <li>
+        <span>我是第5条内容</span>
+        <input type="button" onclick="hideContent(this)" value="隐藏">
+    </li>
+</ul>
+
+<hr>
+<ul id="news">
+    <li>重要新闻</li>
+    <li>普通新闻1</li>
+    <li>普通新闻2</li>
+</ul>
+
+<hr>
+<ul id="superMarket">
+    <li class="fruit">苹果</li>
+    <li>萝卜</li>
+    <li class="fruit">橘子</li>
+    <li class="fruit">鸭梨</li>
+    <li>白菜</li>
+</ul>
+
+</body>
+
+<script>
+
+    function getChildNodeNum() {
+        var oUl = document.getElementById('ul1');
+        for (var i = 0; i < oUl.childNodes.length; i++){
+            if (oUl.childNodes[i].nodeType == 1){
+                oUl.childNodes[i].style.backgroundColor = '#ccc';
+            }
+        }
+    }
+
+    var icon = document.getElementById('hide-icon');
+
+    icon.onclick = function () {
+        this.parentNode.style.display = 'none';
+    };
+
+    function hideContent(abc) {
+        abc.parentNode.style.display = 'none';
+    }
+
+    function impNew() {
+        var oFirstNew = document.getElementById('news');
+        if (oFirstNew.firstElementChild){
+            console.log('have firstElement!');
+            oFirstNew.firstElementChild.style.color = 'red';
+        }
+        else {
+            oFirstNew.firstChild.style.color = 'red';
+        }
+    }
+    
+    function getClassName(oParent, sClass) {
+        var aResult = [];
+
+        var aElement = oParent.getElementsByTagName('*');
+
+        for (var i = 0; i < aElement.length; i++){
+            if (aElement[i].className === sClass){
+                aResult.push(aElement[i]);
+            }
+        }
+        return aResult;
+    }
+
+    function setFruitColor() {
+        var oUl = document.getElementById('superMarket');
+
+        var aRes = getClassName(oUl,'fruit');
+        for (var i = 0; i < aRes.length; i++){
+            aRes[i].style.color = '#CC8162';
+        }
+    }
+
+    getChildNodeNum();
+    impNew();
+    setFruitColor();
+
+</script>
+</html>
