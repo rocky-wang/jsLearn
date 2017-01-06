@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>改变Table样式</title>
+    <script src="tableOps.js"></script>
+    <script>
+        window.onload = function () {
+            var oTab1 = document.getElementById('tabStu');
+            var oBtn1 = document.getElementById('tabAdd');
+            setColorByRules(oTab1);
+
+            oBtn1.onclick = function () {
+                addTableByInputData(oTab1);
+            };
+        }
+    </script>
+</head>
+
+<body>
+<h1>通过Dom操作来对table进行变化</h1>
+<h3>按照一定规律改变表格背景颜色</h3>
+
+<table id="tabStu" border="1" width="500">
+    <thead>
+        <tr>
+            <td>编号</td>
+            <td>姓名</td>
+            <td>年龄</td>
+            <td>成绩</td>
+            <td>操作</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>1</td>
+            <td>小明</td>
+            <td>19</td>
+            <td>87</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>小红</td>
+            <td>18</td>
+            <td>70</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>啊杜</td>
+            <td>20</td>
+            <td>95</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>张伟</td>
+            <td>18</td>
+            <td>93</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>张益达</td>
+            <td>20</td>
+            <td>50</td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<label for="tabName">姓名：</label><input id="tabName" type="text">
+<label for="tabAge">年龄：</label><input id="tabAge" type="text">
+<label for="tabScore">分数：</label><input id="tabScore" type="text">
+<input id="tabAdd" type="button" value="添加">
+
+</body>
+</html>
