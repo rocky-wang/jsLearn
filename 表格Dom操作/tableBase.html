@@ -8,10 +8,27 @@
         window.onload = function () {
             var oTab1 = document.getElementById('tabStu');
             var oBtn1 = document.getElementById('tabAdd');
+            var oBtnSearch = document.getElementById('btnSearch');
+            var oBtnSort = document.getElementById('sortBtn');
+            var oul1 = document.getElementById('sortTable');
+            var oBtnSort2 = document.getElementById('sortScore');
+
             setColorByRules(oTab1);
 
             oBtn1.onclick = function () {
                 addTableByInputData(oTab1);
+            };
+
+            oBtnSearch.onclick = function () {
+                var sText = document.getElementById('searchText');
+                searchByText(oTab1,sText.value);
+            };
+
+            oBtnSort.onclick = function () {
+                sortList(oul1);
+            };
+            oBtnSort2.onclick = function () {
+                sortByScore(oTab1);
             };
         }
     </script>
@@ -20,7 +37,9 @@
 <body>
 <h1>通过Dom操作来对table进行变化</h1>
 <h3>按照一定规律改变表格背景颜色</h3>
-
+<input type="text" id="searchText">
+<input id="btnSearch" type="button" value="搜索">
+<input type="button" value="成绩排序" id="sortScore">
 <table id="tabStu" border="1" width="500">
     <thead>
         <tr>
@@ -64,7 +83,7 @@
             <td>5</td>
             <td>张益达</td>
             <td>20</td>
-            <td>50</td>
+            <td>77</td>
             <td></td>
         </tr>
     </tbody>
@@ -74,6 +93,15 @@
 <label for="tabAge">年龄：</label><input id="tabAge" type="text">
 <label for="tabScore">分数：</label><input id="tabScore" type="text">
 <input id="tabAdd" type="button" value="添加">
+
+<ul id="sortTable">
+    <li>32</li>
+    <li>12</li>
+    <li>9</li>
+    <li>55</li>
+    <li>22</li>
+</ul>
+<input type="button" value="排序" id="sortBtn">
 
 </body>
 </html>
