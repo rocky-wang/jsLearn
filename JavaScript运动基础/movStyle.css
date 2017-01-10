@@ -1,0 +1,36 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.box {
+    position: relative;
+    margin: 10px 0;
+    padding: 0;
+    height: 100px;
+}
+
+#div1{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+#asideInfo {
+    width: 50px;
+    height: 100px;
+    background-color: green;
+    position: absolute;
+    left: -50px;
+}
+
+#asideInfo span {
+    position: absolute;
+    width: 20px;
+    height: 60px;
+    line-height: 20px;
+    background-color: blue;
+    right: -20px;
+    top: 20px;
+}
