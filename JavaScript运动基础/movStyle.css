@@ -14,6 +14,7 @@
     position: absolute;
     width: 100px;
     height: 100px;
+    left: 600px;
     background-color: red;
 }
 
@@ -33,4 +34,19 @@
     background-color: blue;
     right: -20px;
     top: 20px;
+}
+
+.left-300{
+    position: absolute;
+    left: 300px;
+    width: 1px;
+    height: 120px;
+    background-color: black;
+}
+
+#picDiv {
+    width: 170px;
+    height: 190px;
+    background: red;
+    opacity: 0.3;
 }

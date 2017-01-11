@@ -11,24 +11,41 @@
 <h2>基础运动1</h2>
 <p>匀速运动</p>
 <label for="speedText">运行速度：</label>
-<input type="text" id="speedText">
+<input type="text" id="speedText" value="5">
 <input type="button" id="btn1" value="开始运动">
 <input type="button" id="btn2" value="回到原点">
 <div class="box">
     <div id="div1">
 
     </div>
-</div>
-<h2>基础运动2</h2>
-<h3>运动框架</h3>
-<p>在开始运动时，关闭已有定时器</p>
-<p>把运动和停止隔开（if/else）</p>
-<p>分享到的侧边栏例子</p>
-<div class="box">
-    <div id="asideInfo">
-        <span>分享到</span>
+    <div class="left-300">
+
     </div>
 </div>
-<p>淡入淡出的图片</p>
+<h2>基础运动2</h2>
+<p>在开始运动时，关闭已有定时器</p>
+<p>把运动和停止隔开（if/else）</p>
+<article>
+    <h3>分享到侧边栏滑动效果</h3>
+    <label for="asideSpeed">设置滑动速度</label>
+    <input type="text" id="asideSpeed" value="5">
+    <div class="box">
+        <div id="asideInfo">
+            <span>分享到</span>
+        </div>
+    </div>
+</article>
+
+<article>
+    <h3>淡入淡出的图片</h3>
+    <p>主要通过设置透明度的方式来达到淡入淡出的效果。</p>
+    <div style="margin: 10px 0;">
+        <div id="picDiv">
+            <img src="caffe-2.jpg" alt="咖啡" width="170">
+        </div>
+    </div>
+</article>
+
+<div></div>
 </body>
 </html>

@@ -1,23 +1,44 @@
 /**
- * Created by Rocky-Wang on 2017/1/10.
+ * moveToPosFromDiv : 设置一个Div以左边为基准，一个速度偏移一个相对位移。
+ * oDiv : 要操作向左偏移的Div对象类型；
+ * strSpeed : 以多大的速度向左偏移，数字类型；
+ * iTargetPos : 向左偏移的终点坐标，数字类型；
  */
-var timer = null;
-function MoveToDiv(speed) {
-    var oDiv1 = document.getElementById('div1');
-
-    speed = parseInt(speed);
-    if (isNaN(speed)){
-        alert('the speed is Not number!');
+var movTimer = null;
+function moveToLeftPosFromDiv(oDiv,iSpeed,iTargetPos,flags) {
+    var posFun = null;
+    if ( isNaN(iSpeed) || isNaN(iTargetPos) ){
+        alert('the Speed or TargetPos is Not number!');
         return ;
     }
 
-    clearInterval(timer);
-    timer = setInterval(function () {
-        if (oDiv1.offsetLeft >= 300) {
-            clearInterval(timer);
+    if ( iTargetPos > oDiv.offsetLeft ){
+        posFun = function () {
+            if (flags){
+                iSpeed = Math.ceil((iTargetPos - oDiv.offsetLeft)/12);
+            }
+            return iTargetPos - oDiv.offsetLeft;
+        }
+    }
+    else {
+        iSpeed = -1 * iSpeed;
+        posFun = function () {
+            if (flags) {
+                iSpeed = Math.floor((iTargetPos - oDiv.offsetLeft)/12);
+            }
+            return oDiv.offsetLeft - iTargetPos;
+        }
+    }
+
+    clearInterval(movTimer);
+    movTimer = setInterval(function () {
+        console.log('the speed is ' + iSpeed);
+        if ( posFun() <= 0 ) {
+            oDiv.style.left = iTargetPos + 'px';
+            clearInterval(movTimer);
         }
         else {
-            oDiv1.style.left = oDiv1.offsetLeft + speed + 'px';
+            oDiv.style.left = oDiv.offsetLeft + iSpeed + 'px';
         }
     },30);
 }
@@ -28,54 +49,93 @@ function rewindDiv() {
     oDiv1.style.left = 0;
 }
 
-
-var sideTimer = null;
-function toOffsetByAsider(oDiv,targetOffset) {
-    var speed = 0;
-    var tmp = null;
-
-    if (targetOffset > oDiv.offsetLeft){
-        speed = 3;
-        tmp = function () {
-            return targetOffset - oDiv.offsetLeft;
+/**
+ * 设置透明度变化的函数
+ * */
+var currentAlpha = 30;
+var alphaTimer = null;
+function moveToAlphaFromDiv(oDiv, iSpeed, iAlphaValue) {
+    var alphaFun = null;
+    if (currentAlpha < iAlphaValue){
+        alphaFun = function () {
+            return iAlphaValue - currentAlpha;
         };
-
     }
     else {
-        speed = -3;
-        tmp = function () {
-            return oDiv.offsetLeft - targetOffset;
+        iSpeed = -1 * iSpeed;
+        alphaFun = function () {
+            return currentAlpha - iAlphaValue;
         };
     }
 
-    clearInterval(sideTimer);
-    sideTimer = setInterval(function () {
-        console.log('the tmp is ' + tmp() );
-        if ( tmp() <= 0 ){
-            oDiv.style.left = targetOffset + 'px';
-            clearInterval(sideTimer);
+    clearInterval(alphaTimer);
+    alphaTimer = setInterval(function () {
+        if ( alphaFun() <= 0 ){
+            currentAlpha = iAlphaValue;
+            clearInterval(alphaTimer);
         }
         else {
-            oDiv.style.left = oDiv.offsetLeft + speed + 'px';
+            currentAlpha = currentAlpha + iSpeed;
         }
+        oDiv.style.opacity = currentAlpha/100;
     },30);
 }
 
+/**
+ * JavaScript加载后初始化
+ * */
 window.onload = function () {
     var oBtn1 = document.getElementById('btn1');
     var oBtn2 = document.getElementById('btn2');
-    var oSider = document.getElementById('asideInfo');
+    var oSidebar = document.getElementById('asideInfo');
+    var oDiv1 = document.getElementById('div1');
+    var oImageDiv = document.getElementById('picDiv');
 
+    // 触发一个移动到一个固定的偏移的功能
     oBtn1.onclick = function () {
         var sTxt = document.getElementById('speedText');
-        MoveToDiv(sTxt.value);
+        var iSpeed = parseInt(sTxt.value);
+
+        if ( isNaN(iSpeed) ){
+            alert('Please input number character!');
+            return ;
+        }
+
+        moveToLeftPosFromDiv(oDiv1,iSpeed,300,1);
     };
+    // 将Div移动到开始位置
     oBtn2.onclick = rewindDiv;
 
-    oSider.onmouseover = function () {
-        toOffsetByAsider(oSider,0);
+    // 侧边栏鼠标移入动作
+    oSidebar.onmouseover = function () {
+        var tSpeed = document.getElementById('asideSpeed');
+        var iSpeed = parseInt(tSpeed.value);
+
+        if ( isNaN(iSpeed) ){
+            alert('Please input number character!');
+            return ;
+        }
+        moveToLeftPosFromDiv(oSidebar,iSpeed,0);
     };
-    oSider.onmouseout = function () {
-        toOffsetByAsider(oSider,-50);
-    }
+
+    // 侧边栏鼠标移出动作
+    oSidebar.onmouseout = function () {
+        var tSpeed = document.getElementById('asideSpeed');
+        var iSpeed = parseInt(tSpeed.value);
+
+        if ( isNaN(iSpeed) ){
+            alert('Please input number character!');
+            return ;
+        }
+        moveToLeftPosFromDiv(oSidebar,iSpeed,-50);
+    };
+
+    // 图片淡入淡出
+    oImageDiv.onmouseover = function () {
+        moveToAlphaFromDiv(oImageDiv,12,100);
+    };
+    oImageDiv.onmouseout = function () {
+        moveToAlphaFromDiv(oImageDiv,4,30);
+    };
+
 };
