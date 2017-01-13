@@ -3,6 +3,7 @@
  * oDiv : 要操作向左偏移的Div对象类型；
  * strSpeed : 以多大的速度向左偏移，数字类型；
  * iTargetPos : 向左偏移的终点坐标，数字类型；
+ * flags : 当为值时，代表缓冲运动，否则为匀速运动；缓冲运动的话，速度值无效。
  */
 var movTimer = null;
 function moveToLeftPosFromDiv(oDiv,iSpeed,iTargetPos,flags) {
@@ -137,5 +138,4 @@ window.onload = function () {
     oImageDiv.onmouseout = function () {
         moveToAlphaFromDiv(oImageDiv,4,30);
     };
-
 };

@@ -5,8 +5,14 @@
     <title>JavaScript运动基础</title>
     <link rel="stylesheet" href="movStyle.css">
     <script src="jsMoveBase.js"></script>
+    <script>
+        window.onscroll = function () {
+            var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            console.log('the top is ' + scrollTop);
+        };
+    </script>
 </head>
-<body>
+<body style="height: 1500px">
 <h1>JavaScript运动基础</h1>
 <h2>基础运动1</h2>
 <p>匀速运动</p>
@@ -46,6 +52,8 @@
     </div>
 </article>
 
-<div></div>
+<div>
+    右边浮点框
+</div>
 </body>
 </html>
