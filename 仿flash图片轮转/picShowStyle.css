@@ -23,6 +23,50 @@ img { border: 0; }
     position: relative;
 }
 
+.markLeft{
+    width: 150px;
+    height: 320px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 3000;
+}
+
+.markRight{
+    width: 150px;
+    height: 320px;
+    position: absolute;
+    left: 200px;
+    top: 0;
+    z-index: 3000;
+}
+
+.big_pic .pre{
+    width: 60px;
+    height: 60px;
+    background: url("images/btn.gif") no-repeat;
+    position: absolute;
+    top: 130px;
+    left: 10px;
+    z-index: 3001;
+    opacity: 0;
+    filter: alpha(opacity:0);
+    cursor: pointer;
+}
+
+.big_pic .next{
+    width: 60px;
+    height: 60px;
+    background: url("images/btn.gif") no-repeat 0 -60px;
+    position: absolute;
+    top: 130px;
+    right: 10px;
+    z-index: 3001;
+    opacity: 0;
+    filter: alpha(opacity:0);
+    cursor: pointer;
+}
+
 .big_pic li {
     width: 400px;
     height: 320px;
@@ -80,6 +124,9 @@ img { border: 0; }
     height: 94px;
     float: left;
     padding-right: 10px;
+    cursor: pointer;
+    opacity: 0.6;
+    filter: alpha(opacity:60);
 }
 
 .small_pic img {

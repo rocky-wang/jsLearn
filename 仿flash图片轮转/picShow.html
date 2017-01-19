@@ -1,13 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <title>仿Flash图片轮转</title>
     <link rel="stylesheet" href="picShowStyle.css">
+    <script src="movBase.js"></script>
 </head>
 <body>
-<div class="play">
+<div class="play" id="idPlayImages">
     <ul class="big_pic">
+        <div class="pre"></div>
+        <div class="next"></div>
+
+        <a class="markLeft" href="javascript:;"></a>
+        <a class="markRight" href="javascript:;"></a>
+
         <div class="text">加载图片说明......</div>
         <div class="length">计算图片数量......</div>
         <div class="bg"></div>
@@ -21,7 +28,7 @@
     </ul>
     <div class="small_pic">
         <ul style="width:390px;">
-            <li><img src="images/1.jpg" alt="第一幅缩略图"></li>
+            <li style="opacity: 1"><img src="images/1.jpg" alt="第一幅缩略图"></li>
             <li><img src="images/2.jpg" alt="第二幅缩略图"></li>
             <li><img src="images/3.jpg" alt="第三幅缩略图"></li>
             <li><img src="images/4.jpg" alt="第四幅缩略图"></li>
@@ -31,4 +38,87 @@
     </div>
 </div>
 </body>
+<script>
+    var oDiv = document.getElementById('idPlayImages');
+    var oBtnLeft = getObjsByClass(oDiv,'pre')[0];
+    var oBtnRight = getObjsByClass(oDiv,'next')[0];
+
+    var oMarkLeft = getObjsByClass(oDiv,'markLeft')[0];
+    var oMarkRight = getObjsByClass(oDiv,'markRight')[0];
+
+    var oDivSmall = getObjsByClass(oDiv,'small_pic')[0];
+
+    var aLiSmall = oDivSmall.getElementsByTagName('li');
+    var oUlBig = getObjsByClass(oDiv,'big_pic')[0];
+    var aLiBig = oUlBig.getElementsByTagName('li');
+
+    // 大图左面及按钮显示部分
+    oBtnLeft.onmouseover = oMarkLeft.onmouseover = function () {
+        startMov(oBtnLeft,'opacity', 100);
+    };
+    oBtnLeft.onmouseout = oMarkLeft.onmouseout = function () {
+        startMov(oBtnLeft,'opacity', 0);
+    };
+
+    // 大图右面及按钮显示部分
+    oBtnRight.onmouseover = oMarkRight.onmouseover = function () {
+        startMov(oBtnRight,'opacity', 100);
+    };
+    oBtnRight.onmouseout = oMarkRight.onmouseout = function () {
+        startMov(oBtnRight,'opacity', 0);
+    };
+
+    var nowZIndex = 2;
+    var now = 0;
+    
+    function picTab() {
+        aLiBig[now].style.zIndex = nowZIndex++;
+
+        for (var j = 0; j < aLiSmall.length; j++){
+            startMov(aLiSmall[j],'opacity',60);
+        }
+        startMov(aLiSmall[now],'opacity',100);
+
+        aLiBig[now].style.height = 0;
+        startMov(aLiBig[now],'height',320);
+    }
+
+    // 大图按钮点击左右键情况
+    oBtnRight.onclick = function () {
+        if ( now < aLiSmall.length){
+            now = (now + 1);
+            picTab();
+        }
+    };
+
+    oBtnLeft.onclick = function () {
+        if (now > 0){
+            now = (now - 1);
+            picTab();
+        }
+    };
+
+    // 小图点击后大图切换和透明效果
+    for (var i = 0; i < aLiSmall.length; i++){
+        aLiSmall[i].index = i;
+        aLiSmall[i].onclick = function () {
+            if (this.index == now)
+                return;
+
+            now = this.index;
+            picTab();
+        };
+
+        aLiSmall[i].onmouseover = function () {
+            startMov(this,'opacity',100);
+        };
+
+        aLiSmall[i].onmouseout = function () {
+            if (this.index != now){
+                startMov(this,'opacity',60);
+            }
+        };
+    }
+
+</script>
 </html>

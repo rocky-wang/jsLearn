@@ -1,5 +1,5 @@
 /**
- * Created by Rocky-Wang on 2017/1/13.
+ * Created by Rocky-Wang on 2017/1/18.
  */
 
 // 获取目标的样式信息
@@ -10,6 +10,20 @@ function getStyle(obj, name) {
     else {
         return getComputedStyle(obj,null)[name];
     }
+}
+
+// 通过类名获取对象
+function getObjsByClass(oParent, sClass) {
+    var aResult = [];
+
+    var aElement = oParent.getElementsByTagName('*');
+
+    for (var i = 0; i < aElement.length; i++){
+        if (aElement[i].className === sClass){
+            aResult.push(aElement[i]);
+        }
+    }
+    return aResult;
 }
 
 /**
